@@ -24,8 +24,8 @@ object Selection {
   	lbest.filter(_ != x)
   }
 
-  def find[A](l: List[A],n: Int, r: Int, c: Int) : Int =
-  	l.indexOf(r * n + c) 
+  def find[A](l: List[A],n: Int, r: Int, c: Int) : A =
+  	l(r * n + c) 
 
   def f(r: Int,nRows: Int, np : Int, sqSide : Int) : Int =
  	if(r == nRows - 1)
@@ -41,6 +41,8 @@ object Selection {
   	val nRows = scala.math.ceil(np/sqSide.toDouble).toInt
   	val row = (index / sqSide).toInt
   	val col = (index % sqSide).toInt
+
+  	val north = find(l, sqSide, (row - 1 + nRows) % nRows - ((col >= f(row - 1 + nRows,nRows,np,sqSide) % nRows) ? 1 | 0), col)
   }
     
 }
