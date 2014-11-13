@@ -27,12 +27,6 @@ object Selection {
   def find[A](l: List[A],n: Int, r: Int, c: Int) : A =
   	l(r * n + c) 
 
-  def f(r: Int,nRows: Int, np : Int, sqSide : Int) : Int =
- 	if(r == nRows - 1)
- 		np - r * sqSide
- 	else
- 		sqSide
-
   def vonNeumannNeighbourhood[A] : Selection[A] =
   (l: List[A], x: A) => {
   	val np = l.size
@@ -42,7 +36,20 @@ object Selection {
   	val row = (index / sqSide).toInt
   	val col = (index % sqSide).toInt
 
-  	val north = find(l, sqSide, (row - 1 + nRows) % nRows - ((col >= f(row - 1 + nRows,nRows,np,sqSide) % nRows) ? 1 | 0), col)
+  	def f(i: Int) : Int = if(i == nRows - 1) np - i * sqSide else sqSide
+
+  	val north = find(l, sqSide, (row - 1 + nRows) % nRows - (if(col >= f((row - 1 + nRows) % nRows)) 1 else 0), col)
+  	val south = find(l, sqSide, (if(col >= f((row + 1) % nRows)) 0 else (row + 1 ) % nRows), col)
+  	val east = find(l, sqSide, row, (col + 1) % f(row))
+  	val west = find(l, sqSide, row, (col - 1 + f(row)) % f(row))
+  	List(x, north, east, south, west)
+  }
+
+  def hypercubeNeighbourhood[A](n: Int) : Selection[A] =
+  (l: List[A], x: A) => {
+  	val index = l.indexOf(x)
+  	val list = List(0 to (n - 1)).map()
+  	list
   }
     
 }
