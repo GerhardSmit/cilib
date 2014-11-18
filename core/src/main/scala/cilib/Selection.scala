@@ -4,6 +4,8 @@ import scala.math
 
 object Selection {
 
+  import Distance._
+
   def indexNeighbours[A](n: Int): Selection[A] =
     (l: List[A], x: A) => {
       val size = l.size
@@ -48,13 +50,15 @@ object Selection {
   def hypercubeNeighbourhood[A](n: Int) : Selection[A] =
   (l: List[A], x: A) => {
   	val index = l.indexOf(x)
-  	val list = List(0 to (n - 1)).
-  	list
+  	val list = (0 to (n - 1)).toList.map((x:Int) => (index ^ scala.math.pow(2 , x).toInt).toInt)
+  	l.zipWithIndex.filter(x => list.exists(y => y == x._2)).unzip._1
+
   }
 
-  def distanceBased[A](n: Int,d: Distance) : Selection[A] = 
-  (l: List[A], x: A) => {
-  	
+  def distanceBased[S](n: Int,d: Distance) : Selection[(S,Pos[Double])] = 
+  (l: List[S], x: Pos[Double]) => {
+  	val position = x.pos
+
   }
     
 }

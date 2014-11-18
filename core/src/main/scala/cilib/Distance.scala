@@ -4,6 +4,8 @@ import spire._
 import spire.implicits._
 
 object Distance {
+	type Distance = (List[Double], List[Double]) => Double
+
 	def minkowski(p: Double) =
 		(x: List[Double], y: List[Double]) => x.zip(y).map { case (a, b) =>
 		math.abs(a - b) ** p }.sum ** (1 / p)
