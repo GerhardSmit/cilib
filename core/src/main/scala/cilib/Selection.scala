@@ -48,8 +48,13 @@ object Selection {
   def hypercubeNeighbourhood[A](n: Int) : Selection[A] =
   (l: List[A], x: A) => {
   	val index = l.indexOf(x)
-  	val list = List(0 to (n - 1)).map()
+  	val list = List(0 to (n - 1)).
   	list
+  }
+
+  def distanceBased[A](n: Int,d: Distance) : Selection[A] = 
+  (l: List[A], x: A) => {
+  	
   }
     
 }
