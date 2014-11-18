@@ -55,9 +55,10 @@ object Selection {
 
   }
 
-  def distanceBased[S](n: Int,d: Distance) : Selection[(S,Pos[Double])] = 
-  (l: List[S], x: Pos[Double]) => {
+  def distanceBased[S](n: Int,d: Distance)(implicit ord: math.Ordering[Double]) : Selection[(S,Pos[Double])] = 
+  (l: List[(S,Pos[Double])], x: Pos[Double]) => {
   	val position = x.pos
+  	val distances = l.map{case (x,y) => y.pos}
 
   }
     
